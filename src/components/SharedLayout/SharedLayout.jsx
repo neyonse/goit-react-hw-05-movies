@@ -5,7 +5,7 @@ const SharedLayout = () => {
   return (
     <Container>
       <Header>
-        <Logo>
+        <Logo to={`/`}>
           <span role="img" aria-label="popcorn icon">
             🍿
           </span>{' '}

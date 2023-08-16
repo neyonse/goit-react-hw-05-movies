@@ -38,7 +38,11 @@ const PopularMovies = () => {
         <SectionTitle>Popular movies</SectionTitle>
         <MoviesList>
           {trendingMovies.map(movie => (
-            <MovieCard key={movie.id} props={movie} />
+            <MovieCard
+              to={`/movies/${movie.id}`}
+              key={movie.id}
+              props={movie}
+            />
           ))}
         </MoviesList>
       </Section>

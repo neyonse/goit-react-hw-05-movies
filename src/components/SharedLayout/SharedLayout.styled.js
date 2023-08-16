@@ -14,8 +14,8 @@ export const Container = styled.div`
     width: 768px;
   }
 
-  @media screen and (min-width: 1200px) {
-    width: 1200px;
+  @media screen and (min-width: 1024px) {
+    width: 1024px;
   }
 
   @media screen and (min-width: 1440px) {
@@ -37,9 +37,11 @@ export const Header = styled.header`
   }
 `;
 
-export const Logo = styled.p`
+export const Logo = styled(NavLink)`
   font-weight: 700;
   margin: 0;
+
+  text-decoration: none;
 `;
 
 export const Link = styled(NavLink)`

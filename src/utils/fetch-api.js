@@ -27,8 +27,29 @@ async function fetchTrendingMovies() {
   }
 }
 
+async function fetchMovieDetails(movieId) {
+  const url = `${BASE_URL}/movie/${movieId}?language=en-US&api_key=${API_KEY}`;
+
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    // console.log('data', data);
+
+    if (!response.ok) {
+      throw new Error(
+        `Status code: ${data.status_code}. Status message: ${data.status_message}`
+      );
+    }
+
+    return data;
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
 const APIservices = {
   fetchTrendingMovies,
+  fetchMovieDetails,
 };
 
 export default APIservices;
