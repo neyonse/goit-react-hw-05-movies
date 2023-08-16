@@ -1,68 +1,49 @@
-import {
-  Section,
-  SectionTitle,
-  MoviesList,
-  MoviesListItem,
-  Link,
-} from './PopularMovies.styled';
+import { Section, SectionTitle, MoviesList } from './PopularMovies.styled';
 import { useState, useEffect } from 'react';
 import { APIservices } from 'utils';
-
-// let movies = [
-//   { name: 'Movie 1', id: '001' },
-//   { name: 'Movie 2', id: '002' },
-//   { name: 'Movie 3', id: '003' },
-// ];
+import MovieCard from 'components/MovieCard';
 
 const PopularMovies = () => {
-  const [movies, setMovies] = useState([]);
+  const [status, setStatus] = useState('pending');
+  const [trendingMovies, setTrendingMovies] = useState([]);
 
   useEffect(() => {
     const getMoviesData = async () => {
       try {
         const moviesData = await APIservices.fetchTrendingMovies();
-        setMovies(moviesData.results);
-        // setStatus('resolved');
+        setTrendingMovies(moviesData.results);
+        setStatus('resolved');
       } catch (error) {
-        // setStatus('rejected');
+        setStatus('rejected');
+        console.log(error);
       }
     };
 
     getMoviesData();
   }, []);
 
-  const getMoviePoster = async id => {
-    try {
-      const moviePoster = await APIservices.fetchMoviePoster(id);
-      console.log(moviePoster);
-      return moviePoster;
-      // setStatus('resolved');
-    } catch (error) {
-      // setStatus('rejected');
-    }
-  };
+  console.log(trendingMovies);
 
-  // const moviePoster = getMoviePoster(id);
+  if (status === 'pending') {
+    return <div>Loading...</div>;
+  }
 
-  console.log(movies);
+  if (status === 'rejected') {
+    return <div>Oooops, something went wrong...</div>;
+  }
 
-  return (
-    <Section>
-      <SectionTitle>Popular movies</SectionTitle>
-      <MoviesList>
-        {movies.map(movie => (
-          <MoviesListItem key={movie.id}>
-            <img
-              style={{ display: 'block', width: '40px', height: '40px' }}
-              src={movie => getMoviePoster(movie.id)}
-              alt=""
-            />
-            <Link to={`/movies/${movie.id}`}>{movie.original_title}</Link>
-          </MoviesListItem>
-        ))}
-      </MoviesList>
-    </Section>
-  );
+  if (status === 'resolved') {
+    return (
+      <Section>
+        <SectionTitle>Popular movies</SectionTitle>
+        <MoviesList>
+          {trendingMovies.map(movie => (
+            <MovieCard key={movie.id} props={movie} />
+          ))}
+        </MoviesList>
+      </Section>
+    );
+  }
 };
 
 export default PopularMovies;
