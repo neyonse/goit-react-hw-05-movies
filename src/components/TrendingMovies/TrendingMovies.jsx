@@ -1,9 +1,9 @@
-import { Section, SectionTitle, MoviesList } from './PopularMovies.styled';
+import { Section, SectionTitle, MoviesList } from './TrendingMovies.styled';
 import { useState, useEffect } from 'react';
 import { APIservices } from 'utils';
 import MovieCard from 'components/MovieCard';
 
-const PopularMovies = () => {
+const TrendingMovies = () => {
   const [status, setStatus] = useState('pending');
   const [trendingMovies, setTrendingMovies] = useState([]);
 
@@ -35,7 +35,7 @@ const PopularMovies = () => {
   if (status === 'resolved') {
     return (
       <Section>
-        <SectionTitle>Popular movies</SectionTitle>
+        <SectionTitle>Trending movies</SectionTitle>
         <MoviesList>
           {trendingMovies.map(movie => (
             <MovieCard
@@ -50,4 +50,4 @@ const PopularMovies = () => {
   }
 };
 
-export default PopularMovies;
+export default TrendingMovies;

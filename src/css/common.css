@@ -38,6 +38,19 @@ ul {
   margin: 0 auto;
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
 @media screen and (max-width: 767px) {
   .container {
     max-width: 767px;
@@ -55,13 +68,4 @@ ul {
   .container {
     width: 1440px;
   }
-
-  /* .main-wrapper {
-    display: flex;
-    gap: 64px;
-    margin: 40px auto;
-    padding: 0 32px;
-    max-width: 1440px;
-    width: 1440px;
-  } */
 }

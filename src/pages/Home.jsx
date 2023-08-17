@@ -1,7 +1,7 @@
-import PopularMovies from 'components/PopularMovies';
+import TrendingMovies from 'components/TrendingMovies';
 
 const Home = () => {
-  return <PopularMovies />;
+  return <TrendingMovies />;
 };
 
 export default Home;

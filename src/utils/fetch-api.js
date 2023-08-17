@@ -33,7 +33,25 @@ async function fetchMovieDetails(movieId) {
   try {
     const response = await fetch(url);
     const data = await response.json();
-    // console.log('data', data);
+
+    if (!response.ok) {
+      throw new Error(
+        `Status code: ${data.status_code}. Status message: ${data.status_message}`
+      );
+    }
+
+    return data;
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
+async function fetchMovieCredits(movieId) {
+  const url = `${BASE_URL}/movie/${movieId}/credits?language=en-US&api_key=${API_KEY}`;
+
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
 
     if (!response.ok) {
       throw new Error(
@@ -50,6 +68,7 @@ async function fetchMovieDetails(movieId) {
 const APIservices = {
   fetchTrendingMovies,
   fetchMovieDetails,
+  fetchMovieCredits,
 };
 
 export default APIservices;
