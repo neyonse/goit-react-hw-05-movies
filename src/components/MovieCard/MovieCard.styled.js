@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import { RiMovie2Line } from 'react-icons/ri';
 
 export const Card = styled(NavLink)`
   font-weight: 500;
@@ -23,6 +24,9 @@ export const Card = styled(NavLink)`
 `;
 
 export const PosterWrap = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 8px;
   width: 100%;
   height: auto;
@@ -35,13 +39,22 @@ export const PosterWrap = styled.div`
 
   ${Card}:hover & {
     box-shadow: 0px 2px 6px gray;
-    /* transform: scale(1.02); */
   }
 `;
 
 export const PosterImg = styled.img`
   width: 100%;
   height: auto;
+  max-height: 300px;
+  object-fit: fill;
+`;
+
+export const PosterIcon = styled(RiMovie2Line)`
+  display: block;
+  min-width: 220px;
+  min-height: 300px;
+  color: white;
+  background-color: lightgray;
 `;
 
 export const Title = styled.h3`

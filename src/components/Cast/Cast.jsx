@@ -1,8 +1,8 @@
 import {
+  Section,
   ActorsList,
   ActorCard,
   ImgWrap,
-  ActorImg,
   PersonIcon,
   Text,
 } from './Cast.styled.js';
@@ -13,15 +13,15 @@ import { APIservices } from 'utils';
 const Cast = () => {
   const { movieId } = useParams();
 
-  const [status, setStatus] = useState('idle');
+  const [status, setStatus] = useState('pending');
   const [cast, setCast] = useState({});
 
   useEffect(() => {
     const getCastData = async () => {
       try {
-        const { cast } = await APIservices.fetchMovieCredits(movieId);
-        setCast(cast);
-        console.log('creditsData:', cast);
+        const creditsData = await APIservices.fetchMovieCredits(movieId);
+        // console.log('creditsData:', creditsData);
+        setCast(creditsData.cast);
         setStatus('resolved');
       } catch (error) {
         setStatus('rejected');
@@ -31,10 +31,6 @@ const Cast = () => {
 
     getCastData();
   }, [movieId]);
-
-  if (status === 'idle') {
-    return <div>There is no cast yet.</div>;
-  }
 
   if (status === 'pending') {
     return <div>Loading...</div>;
@@ -46,27 +42,32 @@ const Cast = () => {
 
   if (status === 'resolved') {
     return (
-      <ActorsList>
-        {cast.map(actor => {
-          const { id, name, profile_path } = actor;
-          return (
-            <ActorCard key={id}>
-              <ImgWrap>
-                {profile_path ? (
-                  <ActorImg
-                    src={`http://image.tmdb.org/t/p/w200${profile_path}`}
-                    alt={name}
-                  />
-                ) : (
-                  <PersonIcon />
-                )}
-              </ImgWrap>
+      <Section>
+        {cast.length === 0 ? (
+          <p>We don't have any cast data for this movie.</p>
+        ) : (
+          <ActorsList>
+            {cast.map(({ id, name, profile_path }) => {
+              return (
+                <ActorCard key={id}>
+                  <ImgWrap>
+                    {profile_path ? (
+                      <img
+                        src={`http://image.tmdb.org/t/p/w200${profile_path}`}
+                        alt={name}
+                      />
+                    ) : (
+                      <PersonIcon />
+                    )}
+                  </ImgWrap>
 
-              <Text>{name}</Text>
-            </ActorCard>
-          );
-        })}
-      </ActorsList>
+                  <Text>{name}</Text>
+                </ActorCard>
+              );
+            })}
+          </ActorsList>
+        )}
+      </Section>
     );
   }
 };

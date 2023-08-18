@@ -1,3 +1,4 @@
+import { Input } from './SearchBar.styled';
 import { useState } from 'react';
 
 const SearchBar = ({ onSearch }) => {
@@ -16,7 +17,11 @@ const SearchBar = ({ onSearch }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="search" onChange={handleChange} />
+      <Input
+        type="search"
+        onChange={handleChange}
+        placeholder="search a movie"
+      />
     </form>
   );
 };

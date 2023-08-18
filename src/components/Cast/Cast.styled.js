@@ -2,6 +2,14 @@ import styled from 'styled-components';
 // import { NavLink } from 'react-router-dom';
 import { BsFilePersonFill } from 'react-icons/bs';
 
+export const Section = styled.section`
+  margin-bottom: 24px;
+
+  @media screen and (min-width: 768px) {
+    margin-bottom: 32px;
+  }
+`;
+
 export const ActorsList = styled.ul`
   display: flex;
   flex-wrap: wrap;
@@ -30,23 +38,16 @@ export const ImgWrap = styled.div`
   justify-content: center;
   margin-bottom: 8px;
   min-width: 100px;
-  min-height: 150px;
+  max-height: 150px;
 
   border-radius: 12px;
   overflow: hidden;
-`;
-
-export const ActorImg = styled.img`
-  min-width: 100px;
-  min-height: 150px;
-  object-fit: cover;
 `;
 
 export const PersonIcon = styled(BsFilePersonFill)`
   min-width: 150px;
   min-height: 150px;
   fill: lightgray;
-  object-fit: cover;
 `;
 
 export const Text = styled.p`

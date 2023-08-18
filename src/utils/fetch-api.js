@@ -26,6 +26,24 @@ async function fetchTrendingMovies() {
     throw new Error(error.message);
   }
 }
+async function fetchMoviesByName(query) {
+  const url = `${BASE_URL}/search/movie?query=${query}&include_adult=false&language=en-US&api_key=${API_KEY}`;
+
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(
+        `Status code: ${data.status_code}. Status message: ${data.status_message}`
+      );
+    }
+
+    return data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
 
 async function fetchMovieDetails(movieId) {
   const url = `${BASE_URL}/movie/${movieId}?language=en-US&api_key=${API_KEY}`;
@@ -86,6 +104,7 @@ async function fetchMovieReviews(movieId) {
 
 const APIservices = {
   fetchTrendingMovies,
+  fetchMoviesByName,
   fetchMovieDetails,
   fetchMovieCredits,
   fetchMovieReviews,

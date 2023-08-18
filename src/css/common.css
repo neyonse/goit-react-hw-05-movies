@@ -38,6 +38,11 @@ ul {
   margin: 0 auto;
 }
 
+.message {
+  margin-top: 24px;
+  font-size: 16px;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;

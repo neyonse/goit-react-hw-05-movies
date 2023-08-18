@@ -20,7 +20,7 @@ const MovieDetails = () => {
   const { movieId } = useParams();
   // console.log(movieId);
 
-  const [status, setStatus] = useState('idle');
+  const [status, setStatus] = useState('pending');
   const [movieDetails, setMovieDetails] = useState({});
 
   useEffect(() => {
@@ -38,10 +38,6 @@ const MovieDetails = () => {
 
     getMoviesData();
   }, [movieId]);
-
-  if (status === 'idle') {
-    return <div>There is no movies yet</div>;
-  }
 
   if (status === 'pending') {
     return <div>Loading...</div>;

@@ -1,17 +1,12 @@
+import { Section, List } from './MoviesList.styled';
 import { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
-
-const movies = [
-  { name: 'Movie 1', id: '001' },
-  { name: 'Movie 2', id: '002' },
-  { name: 'Movie 3', id: '003' },
-  { name: 'Movie 4', id: '004' },
-  { name: 'Movie 5', id: '005' },
-  { name: 'Movie 6', id: '006' },
-];
+import { APIservices } from 'utils';
+import MovieCard from 'components/MovieCard';
 
 const MoviesList = ({ newQuery }) => {
+  const [status, setStatus] = useState('idle');
   const [query, setQuery] = useState('');
+  const [movies, setMovies] = useState('');
 
   useEffect(() => {
     if (newQuery !== query) {
@@ -19,20 +14,61 @@ const MoviesList = ({ newQuery }) => {
     }
   }, [newQuery, query]);
 
-  const filteredMovies = movies.filter(({ name }) => name.includes(query));
+  useEffect(() => {
+    if (!query) return;
 
-  return (
-    <div>
-      <h3>Popular movies</h3>
-      <ul style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-        {filteredMovies.map(movie => (
-          <ul key={movie.id}>
-            <NavLink to={`/movies/:${movie.id}`}>{movie.name}</NavLink>
-          </ul>
-        ))}
-      </ul>
-    </div>
-  );
+    const getMoviesData = async () => {
+      setStatus('pending');
+      try {
+        const moviesData = await APIservices.fetchMoviesByName(query);
+        setMovies(moviesData.results);
+        console.log(moviesData);
+        setStatus('resolved');
+      } catch (error) {
+        setStatus('rejected');
+        console.log(error);
+      }
+    };
+
+    getMoviesData();
+  }, [query]);
+
+  if (status === 'idle') {
+    return (
+      <div className="message">
+        There is no movies yet. Please enter your search query.
+      </div>
+    );
+  }
+
+  if (status === 'pending') {
+    return <div>Loading...</div>;
+  }
+
+  if (status === 'rejected') {
+    return <div>Oooops, something went wrong.</div>;
+  }
+
+  if (status === 'resolved') {
+    return (
+      <Section>
+        <h2 className="visually-hidden">Found movies</h2>
+        {movies.length === 0 ? (
+          <p>No search results for "{query}".</p>
+        ) : (
+          <List>
+            {movies.map(movie => (
+              <MovieCard
+                to={`/movies/${movie.id}`}
+                key={movie.id}
+                props={movie}
+              />
+            ))}
+          </List>
+        )}
+      </Section>
+    );
+  }
 };
 
 export default MoviesList;
