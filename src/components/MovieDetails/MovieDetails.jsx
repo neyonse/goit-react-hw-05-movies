@@ -5,6 +5,7 @@ import {
   MovieTitle,
   Score,
   Title,
+  Text,
   GenresList,
   GenreLink,
   ListWrap,
@@ -65,14 +66,14 @@ const MovieDetails = () => {
         <section>
           <Wrapper>
             <PosterImg
-              src={`http://image.tmdb.org/t/p/w200${poster_path}`}
+              src={`http://image.tmdb.org/t/p/w300${poster_path}`}
               alt={`${original_title} poster`}
             />
             <Info>
               <MovieTitle>
                 {original_title} ({release_date.slice(0, 4)})
               </MovieTitle>
-              <p>
+              <Text>
                 User Score:{' '}
                 {userScore >= 70 && (
                   <Score style={{ color: '#61c200' }}>{userScore}%</Score>
@@ -83,10 +84,10 @@ const MovieDetails = () => {
                 {userScore < 50 && (
                   <Score style={{ color: '#ab7b00' }}>{userScore}%</Score>
                 )}
-              </p>
+              </Text>
               <div>
                 <Title>Overview</Title>
-                <p>{overview}</p>
+                <Text>{overview}</Text>
               </div>
               <div>
                 <Title>Genres</Title>

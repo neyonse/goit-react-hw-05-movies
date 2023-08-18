@@ -1,10 +1,17 @@
+import {
+  ActorsList,
+  ActorCard,
+  ImgWrap,
+  ActorImg,
+  PersonIcon,
+  Text,
+} from './Cast.styled.js';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { APIservices } from 'utils';
 
 const Cast = () => {
   const { movieId } = useParams();
-  // console.log('cast id', movieId);
 
   const [status, setStatus] = useState('idle');
   const [cast, setCast] = useState({});
@@ -39,17 +46,27 @@ const Cast = () => {
 
   if (status === 'resolved') {
     return (
-      <div>
-        {/* <h3>Cast</h3> */}
+      <ActorsList>
         {cast.map(actor => {
+          const { id, name, profile_path } = actor;
           return (
-            <div key={actor.id}>
-              {/* <img src={actor.profile_path} alt={actor.name} /> */}
-              <p>{actor.name}</p>
-            </div>
+            <ActorCard key={id}>
+              <ImgWrap>
+                {profile_path ? (
+                  <ActorImg
+                    src={`http://image.tmdb.org/t/p/w200${profile_path}`}
+                    alt={name}
+                  />
+                ) : (
+                  <PersonIcon />
+                )}
+              </ImgWrap>
+
+              <Text>{name}</Text>
+            </ActorCard>
           );
         })}
-      </div>
+      </ActorsList>
     );
   }
 };
