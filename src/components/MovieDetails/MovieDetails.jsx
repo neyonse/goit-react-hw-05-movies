@@ -1,4 +1,6 @@
 import {
+  Link,
+  Section,
   Wrapper,
   PosterImg,
   Info,
@@ -11,7 +13,7 @@ import {
   ListWrap,
 } from './MovieDetails.styled';
 import { useState, useEffect } from 'react';
-import { Link, Outlet, useParams } from 'react-router-dom';
+import { Outlet, useParams } from 'react-router-dom';
 import { APIservices } from 'utils';
 
 const MovieDetails = () => {
@@ -63,7 +65,8 @@ const MovieDetails = () => {
 
     return (
       <>
-        <section>
+        <Section>
+          <h1 className="visually-hidden">Selected movie info</h1>
           <Wrapper>
             <PosterImg
               src={`http://image.tmdb.org/t/p/w300${poster_path}`}
@@ -101,7 +104,7 @@ const MovieDetails = () => {
               </div>
             </Info>
           </Wrapper>
-        </section>
+        </Section>
 
         <ListWrap>
           <li>

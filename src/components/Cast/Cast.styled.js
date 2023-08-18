@@ -32,7 +32,6 @@ export const ImgWrap = styled.div`
   min-width: 100px;
   min-height: 150px;
 
-  border: 2px solid lightgray;
   border-radius: 12px;
   overflow: hidden;
 `;

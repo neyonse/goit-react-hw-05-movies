@@ -17,7 +17,7 @@ const Cast = () => {
   const [cast, setCast] = useState({});
 
   useEffect(() => {
-    const getMoviesData = async () => {
+    const getCastData = async () => {
       try {
         const { cast } = await APIservices.fetchMovieCredits(movieId);
         setCast(cast);
@@ -29,11 +29,11 @@ const Cast = () => {
       }
     };
 
-    getMoviesData();
+    getCastData();
   }, [movieId]);
 
   if (status === 'idle') {
-    return <div>There is no cast yet</div>;
+    return <div>There is no cast yet.</div>;
   }
 
   if (status === 'pending') {
@@ -41,7 +41,7 @@ const Cast = () => {
   }
 
   if (status === 'rejected') {
-    return <div>Oooops, something went wrong...</div>;
+    return <div>Oooops, something went wrong.</div>;
   }
 
   if (status === 'resolved') {

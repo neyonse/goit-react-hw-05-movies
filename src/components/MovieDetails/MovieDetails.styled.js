@@ -1,4 +1,15 @@
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
+
+export const Section = styled.section`
+  margin-top: 24px;
+  margin-bottom: 24px;
+
+  @media screen and (min-width: 768px) {
+    margin-top: 32px;
+    margin-bottom: 32px;
+  }
+`;
 
 export const Wrapper = styled.div`
   display: flex;
@@ -16,6 +27,10 @@ export const Wrapper = styled.div`
     flex-direction: row;
     align-items: start;
   }
+
+  @media screen and (min-width: 1440px) {
+    gap: 32px;
+  }
 `;
 
 export const Info = styled.div`
@@ -25,6 +40,10 @@ export const Info = styled.div`
 
   @media screen and (min-width: 1024px) {
     gap: 24px;
+  }
+
+  @media screen and (min-width: 1440px) {
+    gap: 32px;
   }
 `;
 
@@ -41,7 +60,7 @@ export const PosterImg = styled.img`
   }
 
   @media screen and (min-width: 1440px) {
-    width: 280px;
+    width: 300px;
   }
 `;
 
@@ -86,6 +105,8 @@ export const Title = styled.h2`
 
 export const Text = styled.p`
   font-size: 14px;
+  white-space: pre-line;
+  overflow-wrap: break-word;
 
   @media screen and (min-width: 768px) {
     font-size: 16px;
@@ -104,15 +125,45 @@ export const GenreLink = styled.a`
   padding: 6px 12px;
   color: inherit;
   text-decoration: none;
-  /* border: 1px solid black; */
   border-radius: 25px;
-  box-shadow: 0px 2px 4px 1px gray;
+  border: 2px solid lightgray;
+  /* background-color: lightgray; */
 
   cursor: default;
+
+  /* &:hover {
+    box-shadow: 0px 2px 6px gray;
+  } */
 `;
 
 export const ListWrap = styled.ul`
   display: flex;
-  gap: 24px;
+  gap: 12px;
   margin-bottom: 24px;
+
+  @media screen and (min-width: 768px) {
+    margin-bottom: 32px;
+  }
+`;
+
+export const Link = styled(NavLink)`
+  display: block;
+  padding: 8px 16px;
+
+  font-weight: 500;
+  text-decoration: none;
+  color: black;
+  border-radius: 4px;
+  border: 2px solid lightgray;
+  background-color: lightgray;
+
+  &.active {
+    color: white;
+    background-color: rebeccapurple;
+    border-color: rebeccapurple;
+  }
+
+  &:hover {
+    box-shadow: 0px 2px 6px gray;
+  }
 `;

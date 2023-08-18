@@ -4,7 +4,7 @@ import { APIservices } from 'utils';
 import MovieCard from 'components/MovieCard';
 
 const TrendingMovies = () => {
-  const [status, setStatus] = useState('pending');
+  const [status, setStatus] = useState('idle');
   const [trendingMovies, setTrendingMovies] = useState([]);
 
   useEffect(() => {
@@ -24,12 +24,16 @@ const TrendingMovies = () => {
 
   console.log(trendingMovies);
 
+  if (status === 'idle') {
+    return <div>There is no movies yet.</div>;
+  }
+
   if (status === 'pending') {
     return <div>Loading...</div>;
   }
 
   if (status === 'rejected') {
-    return <div>Oooops, something went wrong...</div>;
+    return <div>Oooops, something went wrong.</div>;
   }
 
   if (status === 'resolved') {

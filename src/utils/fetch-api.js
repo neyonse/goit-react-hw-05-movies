@@ -65,10 +65,30 @@ async function fetchMovieCredits(movieId) {
   }
 }
 
+async function fetchMovieReviews(movieId) {
+  const url = `${BASE_URL}/movie/${movieId}/reviews?language=en-US&&page=1&api_key=${API_KEY}`;
+
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(
+        `Status code: ${data.status_code}. Status message: ${data.status_message}`
+      );
+    }
+
+    return data;
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
 const APIservices = {
   fetchTrendingMovies,
   fetchMovieDetails,
   fetchMovieCredits,
+  fetchMovieReviews,
 };
 
 export default APIservices;

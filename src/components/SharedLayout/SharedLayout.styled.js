@@ -34,13 +34,18 @@ export const Header = styled.header`
 
   > nav {
     display: flex;
+    gap: 12px;
   }
 `;
 
 export const Logo = styled(NavLink)`
+  font-size: 24px;
   font-weight: 700;
   margin: 0;
 
+  color: yellow;
+  text-shadow: 0px 0px 6px rebeccapurple, 2px 0px 6px rebeccapurple,
+    0px 4px 8px rebeccapurple, -2px 0px 6px rebeccapurple;
   text-decoration: none;
 `;
 
@@ -50,9 +55,16 @@ export const Link = styled(NavLink)`
   text-decoration: none;
   color: black;
   font-weight: 500;
+  border: 2px solid lightgray;
+  background-color: lightgray;
 
   &.active {
     color: white;
-    background-color: orangered;
+    background-color: rebeccapurple;
+    border-color: rebeccapurple;
+  }
+
+  &:hover {
+    box-shadow: 0px 2px 6px gray;
   }
 `;
