@@ -4,7 +4,7 @@ import { RiMovie2Line } from 'react-icons/ri';
 
 export const Card = styled(NavLink)`
   font-weight: 500;
-  color: black;
+  color: #2a2a2a;
   text-decoration: none;
   width: calc((100% - 16px) / 2);
 

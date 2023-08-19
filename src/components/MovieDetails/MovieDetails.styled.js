@@ -20,7 +20,7 @@ export const Wrapper = styled.div`
   margin-bottom: 24px;
 
   font-weight: 500;
-  color: black;
+  color: #2a2a2a;
   text-decoration: none;
 
   @media screen and (min-width: 768px) {
@@ -81,7 +81,7 @@ export const Score = styled.span`
   font-size: 16px;
   font-weight: 700;
 
-  text-shadow: 1px 1px 1px black;
+  text-shadow: 1px 1px 1px #2a2a2a;
 
   @media screen and (min-width: 768px) {
     font-size: 18px;
@@ -152,7 +152,7 @@ export const Link = styled(NavLink)`
 
   font-weight: 500;
   text-decoration: none;
-  color: black;
+  color: #2a2a2a;
   border-radius: 4px;
   border: 2px solid lightgray;
   background-color: lightgray;

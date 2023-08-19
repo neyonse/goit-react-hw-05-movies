@@ -7,7 +7,7 @@ export const Input = styled.input`
   font-family: 'Montserrat', sans-serif;
   font-size: 16px;
   font-weight: 400;
-  color: black;
+  color: #2a2a2a;
 
   border: 2px solid gray;
   border-radius: 50px;

@@ -30,7 +30,7 @@ export const Header = styled.header`
   gap: 12px;
   padding: 8px 0;
   margin-bottom: 16px;
-  border-bottom: 1px solid black;
+  border-bottom: 2px solid #2a2a2a;
 
   > nav {
     display: flex;
@@ -50,10 +50,11 @@ export const Logo = styled(NavLink)`
 `;
 
 export const Link = styled(NavLink)`
+  display: block;
   padding: 8px 16px;
   border-radius: 4px;
   text-decoration: none;
-  color: black;
+  color: #2a2a2a;
   font-weight: 500;
   border: 2px solid lightgray;
   background-color: lightgray;

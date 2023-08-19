@@ -33,11 +33,11 @@ const Cast = () => {
   }, [movieId]);
 
   if (status === 'pending') {
-    return <div>Loading...</div>;
+    return <div className="message">Loading...</div>;
   }
 
   if (status === 'rejected') {
-    return <div>Oooops, something went wrong.</div>;
+    return <div className="message">Oooops, something went wrong.</div>;
   }
 
   if (status === 'resolved') {
