@@ -1,18 +1,21 @@
 import { Section, List } from './MoviesList.styled';
 import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { APIservices } from 'utils';
 import MovieCard from 'components/MovieCard';
 
-const MoviesList = ({ newQuery }) => {
+const MoviesList = () => {
   const [status, setStatus] = useState('idle');
   const [query, setQuery] = useState('');
-  const [movies, setMovies] = useState('');
+  const [movies, setMovies] = useState([]);
+  const [searchParams] = useSearchParams();
+
+  const queryFromParams = searchParams.get('query') ?? '';
+  console.log(queryFromParams);
 
   useEffect(() => {
-    if (newQuery !== query) {
-      setQuery(newQuery);
-    }
-  }, [newQuery, query]);
+    setQuery(queryFromParams);
+  }, [queryFromParams]);
 
   useEffect(() => {
     if (!query) return;
@@ -22,7 +25,7 @@ const MoviesList = ({ newQuery }) => {
       try {
         const moviesData = await APIservices.fetchMoviesByName(query);
         setMovies(moviesData.results);
-        console.log(moviesData);
+        // console.log(moviesData);
         setStatus('resolved');
       } catch (error) {
         setStatus('rejected');
@@ -61,7 +64,7 @@ const MoviesList = ({ newQuery }) => {
               <MovieCard
                 to={`/movies/${movie.id}`}
                 key={movie.id}
-                props={movie}
+                movie={movie}
               />
             ))}
           </List>

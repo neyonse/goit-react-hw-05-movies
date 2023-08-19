@@ -2,7 +2,9 @@ import {
   Link,
   Section,
   Wrapper,
+  PosterWrap,
   PosterImg,
+  PosterIcon,
   Info,
   MovieTitle,
   Score,
@@ -12,13 +14,19 @@ import {
   GenreLink,
   ListWrap,
 } from './MovieDetails.styled';
-import { useState, useEffect } from 'react';
-import { Outlet, useParams } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
+import { Outlet, useParams, useLocation } from 'react-router-dom';
 import { APIservices } from 'utils';
 
 const MovieDetails = () => {
+  const location = useLocation();
+  const backLinkHref = useRef(location.state?.from ?? '/');
+
   const { movieId } = useParams();
   // console.log(movieId);
+
+  console.log(location);
+  console.log(backLinkHref);
 
   const [status, setStatus] = useState('pending');
   const [movieDetails, setMovieDetails] = useState({});
@@ -61,13 +69,20 @@ const MovieDetails = () => {
 
     return (
       <>
+        <Link to={backLinkHref.current}>Go back</Link>
         <Section>
           <h1 className="visually-hidden">Selected movie info</h1>
           <Wrapper>
-            <PosterImg
-              src={`http://image.tmdb.org/t/p/w300${poster_path}`}
-              alt={`${original_title} poster`}
-            />
+            <PosterWrap>
+              {poster_path ? (
+                <PosterImg
+                  src={`http://image.tmdb.org/t/p/w300${poster_path}`}
+                  alt={`${original_title} poster`}
+                />
+              ) : (
+                <PosterIcon />
+              )}
+            </PosterWrap>
             <Info>
               <MovieTitle>
                 {original_title} ({release_date.slice(0, 4)})

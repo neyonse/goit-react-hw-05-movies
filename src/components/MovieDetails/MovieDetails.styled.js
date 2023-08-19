@@ -1,14 +1,10 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import { RiMovie2Line } from 'react-icons/ri';
 
 export const Section = styled.section`
   margin-top: 24px;
   margin-bottom: 24px;
-
-  @media screen and (min-width: 768px) {
-    margin-top: 32px;
-    margin-bottom: 32px;
-  }
 `;
 
 export const Wrapper = styled.div`
@@ -47,20 +43,47 @@ export const Info = styled.div`
   }
 `;
 
-export const PosterImg = styled.img`
-  width: 220px;
+export const PosterWrap = styled.div`
+  min-width: 220px;
   height: auto;
 
   @media screen and (min-width: 768px) {
+    min-width: 240px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    min-width: 260px;
+  }
+
+  @media screen and (min-width: 1440px) {
+    min-width: 300px;
+  }
+`;
+
+export const PosterImg = styled.img`
+  width: 100%;
+  height: auto;
+`;
+
+export const PosterIcon = styled(RiMovie2Line)`
+  width: 300px;
+  height: 450px;
+  color: white;
+  background-color: lightgray;
+
+  @media screen and (min-width: 768px) {
     width: 240px;
+    height: 360px;
   }
 
   @media screen and (min-width: 1024px) {
     width: 260px;
+    height: 390px;
   }
 
   @media screen and (min-width: 1440px) {
     width: 300px;
+    height: 450px;
   }
 `;
 
@@ -140,15 +163,12 @@ export const ListWrap = styled.ul`
   display: flex;
   gap: 12px;
   margin-bottom: 24px;
-
-  @media screen and (min-width: 768px) {
-    margin-bottom: 32px;
-  }
 `;
 
 export const Link = styled(NavLink)`
   display: block;
   padding: 8px 16px;
+  width: fit-content;
 
   font-weight: 500;
   text-decoration: none;

@@ -5,12 +5,15 @@ import {
   PosterImg,
   PosterIcon,
 } from './MovieCard.styled';
+import { useLocation } from 'react-router-dom';
 
-const MovieCard = ({ props }) => {
-  const { id, original_title, poster_path } = props;
+const MovieCard = ({ movie }) => {
+  const location = useLocation();
+
+  const { id, original_title, poster_path } = movie;
 
   return (
-    <Card to={`/movies/${id}`}>
+    <Card to={`/movies/${id}`} state={{ from: location }}>
       <PosterWrap>
         {poster_path ? (
           <PosterImg
