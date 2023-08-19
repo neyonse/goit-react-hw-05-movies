@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const Input = styled.input`
-  padding: 12px 24px;
-  width: 250px;
+  padding: 10px 20px;
+  width: 100%;
 
   font-family: 'Montserrat', sans-serif;
   font-size: 16px;
@@ -22,5 +22,10 @@ export const Input = styled.input`
 
   &:hover {
     border-color: rebeccapurple;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 250px;
+    padding: 12px 24px;
   }
 `;

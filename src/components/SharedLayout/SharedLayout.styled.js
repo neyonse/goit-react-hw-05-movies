@@ -39,7 +39,7 @@ export const Header = styled.header`
 `;
 
 export const Logo = styled(NavLink)`
-  font-size: 24px;
+  font-size: 14px;
   font-weight: 700;
   margin: 0;
 
@@ -47,16 +47,27 @@ export const Logo = styled(NavLink)`
   text-shadow: 0px 0px 6px rebeccapurple, 2px 0px 6px rebeccapurple,
     0px 4px 8px rebeccapurple, -2px 0px 6px rebeccapurple;
   text-decoration: none;
+
+  @media screen and (min-width: 768px) {
+    font-size: 20px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    font-size: 24px;
+  }
 `;
 
 export const Link = styled(NavLink)`
   display: block;
-  padding: 8px 16px;
-  border-radius: 4px;
-  text-decoration: none;
-  color: #2a2a2a;
+  padding: 4px 8px;
+
+  font-size: 14px;
   font-weight: 500;
+  color: #2a2a2a;
+  text-decoration: none;
+
   border: 2px solid lightgray;
+  border-radius: 4px;
   background-color: lightgray;
 
   &.active {
@@ -67,5 +78,10 @@ export const Link = styled(NavLink)`
 
   &:hover {
     box-shadow: 0px 2px 6px gray;
+  }
+
+  @media screen and (min-width: 768px) {
+    font-size: 16px;
+    padding: 8px 16px;
   }
 `;

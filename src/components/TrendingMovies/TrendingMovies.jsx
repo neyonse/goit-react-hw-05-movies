@@ -1,11 +1,15 @@
 import { Section, SectionTitle, MoviesList } from './TrendingMovies.styled';
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { APIservices } from 'utils';
 import MovieCard from 'components/MovieCard';
 
 const TrendingMovies = () => {
   const [status, setStatus] = useState('pending');
   const [trendingMovies, setTrendingMovies] = useState([]);
+
+  const location = useLocation();
+  console.log(location);
 
   useEffect(() => {
     const getMoviesData = async () => {

@@ -33,11 +33,6 @@ ul {
   list-style: none;
 }
 
-.container {
-  padding: 0 16px;
-  margin: 0 auto;
-}
-
 .message {
   margin-top: 24px;
   font-size: 16px;
@@ -54,23 +49,4 @@ ul {
   clip-path: inset(100%);
   clip: rect(0 0 0 0);
   overflow: hidden;
-}
-
-@media screen and (max-width: 767px) {
-  .container {
-    max-width: 767px;
-  }
-}
-
-@media screen and (min-width: 768px) {
-  .container {
-    padding: 0 24px;
-    width: 768px;
-  }
-}
-
-@media screen and (min-width: 1440px) {
-  .container {
-    width: 1440px;
-  }
 }
