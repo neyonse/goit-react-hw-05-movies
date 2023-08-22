@@ -1,4 +1,4 @@
-import { Section, List } from './MoviesList.styled';
+import { Section, List, BtnWrap, PageBtn } from './MoviesList.styled';
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { APIservices } from 'utils';
@@ -8,10 +8,23 @@ const MoviesList = () => {
   const [status, setStatus] = useState('idle');
   const [query, setQuery] = useState('');
   const [movies, setMovies] = useState([]);
-  const [searchParams] = useSearchParams();
+  const [page, setPage] = useState(1);
+  const [nextPageBtn, setNextPageBtn] = useState(false);
+  const [prevPageBtn, setPrevPageBtn] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const queryFromParams = searchParams.get('query') ?? '';
-  console.log(queryFromParams);
+  const pageFromParams = Number(searchParams.get('page')) ?? 1;
+  console.log('pageFromParams', pageFromParams);
+  console.log('page', page);
+
+  useEffect(() => {
+    if (!nextPageBtn) {
+      setPage(1);
+      return;
+    }
+    setPage(pageFromParams);
+  }, [nextPageBtn, pageFromParams, query, setSearchParams]);
 
   useEffect(() => {
     setQuery(queryFromParams);
@@ -23,9 +36,25 @@ const MoviesList = () => {
     const getMoviesData = async () => {
       setStatus('pending');
       try {
-        const moviesData = await APIservices.fetchMoviesByName(query);
-        setMovies(moviesData.results);
-        // console.log(moviesData);
+        const { results, total_pages } = await APIservices.fetchMoviesByName(
+          query,
+          page
+        );
+        setMovies(results);
+        setSearchParams({ query: query, page: page });
+
+        if (page < total_pages) {
+          setNextPageBtn(true);
+        } else {
+          setNextPageBtn(false);
+        }
+
+        if (page > 1) {
+          setPrevPageBtn(true);
+        } else {
+          setPrevPageBtn(false);
+        }
+
         setStatus('resolved');
       } catch (error) {
         setStatus('rejected');
@@ -34,7 +63,16 @@ const MoviesList = () => {
     };
 
     getMoviesData();
-  }, [query]);
+  }, [page, query]);
+
+  const goNextPage = () => {
+    setPage(prevPage => prevPage + 1);
+  };
+
+  const goPrevPage = () => {
+    setPage(prevPage => prevPage - 1);
+    // setSearchParams({ query: query, page: page });
+  };
 
   if (status === 'idle') {
     return (
@@ -69,6 +107,22 @@ const MoviesList = () => {
             ))}
           </List>
         )}
+        <BtnWrap>
+          {prevPageBtn && (
+            <PageBtn
+              type="button"
+              aria-label="previous page"
+              onClick={goPrevPage}
+            >
+              Previous page
+            </PageBtn>
+          )}
+          {nextPageBtn && (
+            <PageBtn type="button" aria-label="next page" onClick={goNextPage}>
+              Next page
+            </PageBtn>
+          )}
+        </BtnWrap>
       </Section>
     );
   }

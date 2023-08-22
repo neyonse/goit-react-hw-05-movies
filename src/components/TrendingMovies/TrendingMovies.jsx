@@ -1,4 +1,9 @@
-import { Section, SectionTitle, MoviesList } from './TrendingMovies.styled';
+import {
+  Section,
+  SectionTitle,
+  MoviesList,
+  ShowMoreBtn,
+} from './TrendingMovies.styled';
 import { useState, useEffect } from 'react';
 import { APIservices } from 'utils';
 import MovieCard from 'components/MovieCard';
@@ -6,12 +11,25 @@ import MovieCard from 'components/MovieCard';
 const TrendingMovies = () => {
   const [status, setStatus] = useState('pending');
   const [trendingMovies, setTrendingMovies] = useState([]);
+  const [page, setPage] = useState(1);
+  const [showBtn, setShowBtn] = useState(false);
 
   useEffect(() => {
     const getMoviesData = async () => {
       try {
-        const moviesData = await APIservices.fetchTrendingMovies();
-        setTrendingMovies(moviesData.results);
+        const { results, total_pages } = await APIservices.fetchTrendingMovies(
+          page
+        );
+        if (page === 1) {
+          setTrendingMovies(results);
+        } else {
+          setTrendingMovies(prevMovies => [...prevMovies, ...results]);
+        }
+
+        if (page < total_pages) {
+          setShowBtn(true);
+        }
+
         setStatus('resolved');
       } catch (error) {
         setStatus('rejected');
@@ -20,7 +38,11 @@ const TrendingMovies = () => {
     };
 
     getMoviesData();
-  }, []);
+  }, [page]);
+
+  const showMore = () => {
+    setPage(prevPage => prevPage + 1);
+  };
 
   if (status === 'pending') {
     return <div>Loading...</div>;
@@ -43,6 +65,11 @@ const TrendingMovies = () => {
             />
           ))}
         </MoviesList>
+        {showBtn && (
+          <ShowMoreBtn type="button" aria-label="show more" onClick={showMore}>
+            Show more
+          </ShowMoreBtn>
+        )}
       </Section>
     );
   }

@@ -2,8 +2,8 @@ const BASE_URL = 'https://api.themoviedb.org/3';
 const API_KEY = '8e2c1bb8d05e4876a0d4092a42278d28';
 // const API_KEY = '8e2c1bb8d05e4876a0d4092a42278d2';
 
-async function fetchTrendingMovies() {
-  const url = `${BASE_URL}/trending/movie/day?language=en-US&api_key=${API_KEY}`;
+async function fetchTrendingMovies(page) {
+  const url = `${BASE_URL}/trending/movie/day?language=en-US&page=${page}&api_key=${API_KEY}`;
 
   // fetch(url)
   //   .then(res => res.json())
@@ -26,8 +26,8 @@ async function fetchTrendingMovies() {
     throw new Error(error.message);
   }
 }
-async function fetchMoviesByName(query) {
-  const url = `${BASE_URL}/search/movie?query=${query}&include_adult=false&language=en-US&api_key=${API_KEY}`;
+async function fetchMoviesByName(query, page) {
+  const url = `${BASE_URL}/search/movie?query=${query}&include_adult=false&language=en-US&page=${page}&api_key=${API_KEY}`;
 
   try {
     const response = await fetch(url);

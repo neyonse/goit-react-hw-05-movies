@@ -38,3 +38,27 @@ export const MoviesList = styled.ul`
     gap: 32px;
   }
 `;
+
+export const ShowMoreBtn = styled.button`
+  display: block;
+  padding: 8px 16px;
+  margin-top: 24px;
+  width: fit-content;
+  margin: 0 auto;
+
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  color: #2a2a2a;
+  border-radius: 4px;
+  border: 2px solid lightgray;
+  background-color: lightgray;
+
+  cursor: pointer;
+
+  transition: box-shadow 250ms cubic-bezier(0.23, 1, 0.32, 1);
+
+  &:hover {
+    box-shadow: 0px 2px 6px gray;
+  }
+`;
