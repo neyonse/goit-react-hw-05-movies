@@ -39,7 +39,7 @@ const MoviesList = () => {
   if (status === 'idle') {
     return (
       <div className="message">
-        There is no movies yet. Please enter your search query.
+        Type in the search box to find a specific movie.
       </div>
     );
   }
@@ -55,7 +55,7 @@ const MoviesList = () => {
   if (status === 'resolved') {
     return (
       <Section>
-        <h2 className="visually-hidden">Found movies</h2>
+        <h2 className="visually-hidden">Find movie</h2>
         {movies.length === 0 ? (
           <p>No search results for "{query}".</p>
         ) : (

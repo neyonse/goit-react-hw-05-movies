@@ -37,16 +37,16 @@ export const PosterWrap = styled.div`
   transition: box-shadow 200ms cubic-bezier(0.23, 1, 0.32, 1);
 
   @media screen and (min-width: 768px) {
-    height: calc(((100vw - 24px * 3 - 24px * 2) / 4) * 1.5);
+    height: calc(((768px - 24px * 3 - 24px * 2) / 4) * 1.5);
   }
 
   @media screen and (min-width: 1024px) {
-    height: calc(((100vw - 32px * 4 - 24px * 2) / 5) * 1.5);
+    height: calc(((1024px - 32px * 4 - 24px * 2) / 5) * 1.5);
   }
 
   @media screen and (min-width: 1440px) {
     margin-bottom: 12px;
-    height: calc(((100vw - 32px * 5 - 24px * 2) / 6) * 1.5);
+    height: calc(((1440px - 32px * 5 - 24px * 2) / 6) * 1.5);
   }
 
   ${Card}:hover & {

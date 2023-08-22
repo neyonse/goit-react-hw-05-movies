@@ -44,7 +44,7 @@ const Cast = () => {
     return (
       <Section>
         {cast.length === 0 ? (
-          <p>We don't have any cast data for this movie.</p>
+          <p>We don't have any cast info for this movie.</p>
         ) : (
           <ActorsList>
             {cast.map(({ id, name, profile_path }) => {

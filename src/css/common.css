@@ -36,6 +36,7 @@ ul {
 .message {
   margin-top: 24px;
   font-size: 16px;
+  text-align: center;
 }
 
 .visually-hidden {

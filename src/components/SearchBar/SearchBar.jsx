@@ -1,6 +1,7 @@
-import { Input } from './SearchBar.styled';
+import { SearchForm, SearchIcon, Input } from './SearchBar.styled';
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { LuSearch } from 'react-icons/lu';
 
 const SearchBar = ({ onSearch }) => {
   const [query, setQuery] = useState('');
@@ -33,14 +34,17 @@ const SearchBar = ({ onSearch }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <SearchForm onSubmit={handleSubmit}>
+      <SearchIcon aria-hidden="true">
+        <LuSearch />
+      </SearchIcon>
       <Input
-        type="search"
+        type="text"
         value={query}
         onChange={handleChange}
-        placeholder="search a movie"
+        placeholder="Search"
       />
-    </form>
+    </SearchForm>
   );
 };
 

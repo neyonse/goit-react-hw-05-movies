@@ -70,6 +70,8 @@ export const Link = styled(NavLink)`
   border-radius: 4px;
   background-color: lightgray;
 
+  transition: box-shadow 250ms cubic-bezier(0.23, 1, 0.32, 1);
+
   &.active {
     color: white;
     background-color: rebeccapurple;
