@@ -18,7 +18,7 @@ const MovieCard = ({ movie }) => {
       <PosterWrap>
         {poster_path ? (
           <PosterImg
-            src={`http://image.tmdb.org/t/p/w200${poster_path}`}
+            src={`http://image.tmdb.org/t/p/w300${poster_path}`}
             alt={`${original_title} poster`}
           />
         ) : (

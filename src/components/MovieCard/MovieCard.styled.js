@@ -19,7 +19,7 @@ export const Card = styled(NavLink)`
   }
 
   @media screen and (min-width: 1440px) {
-    width: calc((100% - 32px * 5) / 6);
+    width: calc((100% - 32px * 4) / 5);
   }
 `;
 
@@ -46,7 +46,7 @@ export const PosterWrap = styled.div`
 
   @media screen and (min-width: 1440px) {
     margin-bottom: 12px;
-    height: calc(((1440px - 32px * 5 - 24px * 2) / 6) * 1.5);
+    height: calc(((1440px - 32px * 4 - 24px * 2) / 5) * 1.5);
   }
 
   ${Card}:hover & {
