@@ -14,7 +14,7 @@ import {
   GenreLink,
   ListWrap,
 } from './MovieDetails.styled';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, Suspense } from 'react';
 import { Outlet, useParams, useLocation } from 'react-router-dom';
 import { APIservices } from 'utils';
 
@@ -24,9 +24,6 @@ const MovieDetails = () => {
 
   const { movieId } = useParams();
 
-  // console.log(location);
-  // console.log(backLinkHref);
-
   const [status, setStatus] = useState('pending');
   const [movieDetails, setMovieDetails] = useState({});
 
@@ -35,7 +32,6 @@ const MovieDetails = () => {
       try {
         const movieData = await APIservices.fetchMovieDetails(movieId);
         setMovieDetails(movieData);
-        // console.log('movieData:', movieData);
         setStatus('resolved');
       } catch (error) {
         setStatus('rejected');
@@ -124,7 +120,9 @@ const MovieDetails = () => {
             <Link to="reviews">Reviews</Link>
           </li>
         </ListWrap>
-        <Outlet />
+        <Suspense fallback={<p className="message">Loading...</p>}>
+          <Outlet />
+        </Suspense>
       </>
     );
   }

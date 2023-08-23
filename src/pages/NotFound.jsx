@@ -1,7 +1,5 @@
 import NotFoundMessage from 'components/NotFoundMessage';
 
-export const NotFound = () => {
-  return <NotFoundMessage />;
-};
+export const NotFound = () => <NotFoundMessage />;
 
 export default NotFound;

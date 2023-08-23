@@ -5,9 +5,7 @@ import SearchBar from 'components/SearchBar';
 const Movies = () => {
   const [query, setQuery] = useState('');
 
-  const handleSearch = inputValue => {
-    setQuery(inputValue);
-  };
+  const handleSearch = inputValue => setQuery(inputValue);
 
   return (
     <>

@@ -2,6 +2,7 @@ import { SearchForm, SearchIcon, Input } from './SearchBar.styled';
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { LuSearch } from 'react-icons/lu';
+import PropTypes from 'prop-types';
 
 const SearchBar = ({ onSearch }) => {
   const [query, setQuery] = useState('');
@@ -15,9 +16,7 @@ const SearchBar = ({ onSearch }) => {
     onSearch(queryFromParams);
   }, [searchParams, onSearch]);
 
-  const handleChange = e => {
-    setQuery(e.target.value);
-  };
+  const handleChange = e => setQuery(e.target.value);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -46,6 +45,10 @@ const SearchBar = ({ onSearch }) => {
       />
     </SearchForm>
   );
+};
+
+SearchBar.propTypes = {
+  onSearch: PropTypes.func.isRequired,
 };
 
 export default SearchBar;

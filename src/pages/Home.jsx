@@ -1,7 +1,5 @@
 import TrendingMovies from 'components/TrendingMovies';
 
-const Home = () => {
-  return <TrendingMovies />;
-};
+const Home = () => <TrendingMovies />;
 
 export default Home;

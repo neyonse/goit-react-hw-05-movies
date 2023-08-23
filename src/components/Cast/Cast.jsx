@@ -20,7 +20,6 @@ const Cast = () => {
     const getCastData = async () => {
       try {
         const creditsData = await APIservices.fetchMovieCredits(movieId);
-        // console.log('creditsData:', creditsData);
         setCast(creditsData.cast);
         setStatus('resolved');
       } catch (error) {

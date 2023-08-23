@@ -6,6 +6,7 @@ import {
   PosterIcon,
 } from './MovieCard.styled';
 import { useLocation } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const MovieCard = ({ movie }) => {
   const location = useLocation();
@@ -27,6 +28,10 @@ const MovieCard = ({ movie }) => {
       <Title>{original_title}</Title>
     </Card>
   );
+};
+
+MovieCard.propTypes = {
+  movie: PropTypes.object.isRequired,
 };
 
 export default MovieCard;
