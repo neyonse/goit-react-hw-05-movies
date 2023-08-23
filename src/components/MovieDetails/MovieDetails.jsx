@@ -23,10 +23,9 @@ const MovieDetails = () => {
   const backLinkHref = useRef(location.state?.from ?? '/');
 
   const { movieId } = useParams();
-  // console.log(movieId);
 
-  console.log(location);
-  console.log(backLinkHref);
+  // console.log(location);
+  // console.log(backLinkHref);
 
   const [status, setStatus] = useState('pending');
   const [movieDetails, setMovieDetails] = useState({});

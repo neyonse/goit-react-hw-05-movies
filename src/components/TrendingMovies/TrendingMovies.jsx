@@ -40,9 +40,7 @@ const TrendingMovies = () => {
     getMoviesData();
   }, [page]);
 
-  const showMore = () => {
-    setPage(prevPage => prevPage + 1);
-  };
+  const showMore = () => setPage(prevPage => prevPage + 1);
 
   if (status === 'pending') {
     return <div>Loading...</div>;

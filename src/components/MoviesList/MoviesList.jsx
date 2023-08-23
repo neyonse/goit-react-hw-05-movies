@@ -7,28 +7,24 @@ import MovieCard from 'components/MovieCard';
 const MoviesList = () => {
   const [status, setStatus] = useState('idle');
   const [query, setQuery] = useState('');
-  const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
-  const [nextPageBtn, setNextPageBtn] = useState(false);
-  const [prevPageBtn, setPrevPageBtn] = useState(false);
+  const [movies, setMovies] = useState([]);
+  const [pageButtons, setPageButtons] = useState({ next: false, prev: false });
+
   const [searchParams, setSearchParams] = useSearchParams();
+
+  // console.log('page', searchParams.get('page'));
+  // console.log('query', searchParams.get('query'));
 
   const queryFromParams = searchParams.get('query') ?? '';
   const pageFromParams = Number(searchParams.get('page')) ?? 1;
-  console.log('pageFromParams', pageFromParams);
-  console.log('page', page);
 
-  useEffect(() => {
-    if (!nextPageBtn) {
-      setPage(1);
-      return;
-    }
-    setPage(pageFromParams);
-  }, [nextPageBtn, pageFromParams, query, setSearchParams]);
+  // const { query: queryFromParams = '', page: pageFromParams = 1 } =
+  //   searchParams; // можна записати так замість рядків 20,21.
 
-  useEffect(() => {
-    setQuery(queryFromParams);
-  }, [queryFromParams]);
+  useEffect(() => setPage(pageFromParams), [pageFromParams]);
+
+  useEffect(() => setQuery(queryFromParams), [queryFromParams]);
 
   useEffect(() => {
     if (!query) return;
@@ -41,20 +37,8 @@ const MoviesList = () => {
           page
         );
         setMovies(results);
-        setSearchParams({ query: query, page: page });
-
-        if (page < total_pages) {
-          setNextPageBtn(true);
-        } else {
-          setNextPageBtn(false);
-        }
-
-        if (page > 1) {
-          setPrevPageBtn(true);
-        } else {
-          setPrevPageBtn(false);
-        }
-
+        setPageButtons({ next: page < total_pages, prev: page > 1 });
+        setSearchParams({ query, page });
         setStatus('resolved');
       } catch (error) {
         setStatus('rejected');
@@ -63,16 +47,11 @@ const MoviesList = () => {
     };
 
     getMoviesData();
-  }, [page, query]);
+  }, [page, query, setSearchParams]);
 
-  const goNextPage = () => {
-    setPage(prevPage => prevPage + 1);
-  };
+  const goNextPage = () => setPage(prevPage => prevPage + 1);
 
-  const goPrevPage = () => {
-    setPage(prevPage => prevPage - 1);
-    // setSearchParams({ query: query, page: page });
-  };
+  const goPrevPage = () => setPage(prevPage => prevPage - 1);
 
   if (status === 'idle') {
     return (
@@ -108,7 +87,7 @@ const MoviesList = () => {
           </List>
         )}
         <BtnWrap>
-          {prevPageBtn && (
+          {pageButtons.prev && (
             <PageBtn
               type="button"
               aria-label="previous page"
@@ -117,7 +96,7 @@ const MoviesList = () => {
               Previous page
             </PageBtn>
           )}
-          {nextPageBtn && (
+          {pageButtons.next && (
             <PageBtn type="button" aria-label="next page" onClick={goNextPage}>
               Next page
             </PageBtn>

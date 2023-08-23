@@ -27,7 +27,7 @@ const SearchBar = ({ onSearch }) => {
     if (trimmedQuery === '') {
       setSearchParams({});
     } else {
-      setSearchParams({ query: trimmedQuery });
+      setSearchParams({ query: trimmedQuery, page: 1 });
     }
 
     onSearch(trimmedQuery);

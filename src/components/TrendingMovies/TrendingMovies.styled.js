@@ -42,9 +42,9 @@ export const MoviesList = styled.ul`
 export const ShowMoreBtn = styled.button`
   display: block;
   padding: 8px 16px;
-  margin-top: 24px;
   width: fit-content;
   margin: 0 auto;
+  margin-top: 24px;
 
   font-family: inherit;
   font-size: 16px;
